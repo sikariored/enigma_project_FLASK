@@ -107,10 +107,11 @@ table tr {
 }
 .table td, .table th{
     border-top: 0;
+
 }
 table tbody td,table tbody th {
     text-align: center;
-    width: 240px;
+    width: 300px;
 }
 
 #table-userid {
