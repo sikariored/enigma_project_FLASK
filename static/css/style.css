@@ -18,6 +18,10 @@ h1 {
     text-align: center;
 }
 
+h2 {
+    margin-bottom: 30px;
+}
+
 .select-form label {
     width: 64px;
 }
@@ -175,9 +179,9 @@ table tbody td,table tbody th {
 .container.add-user-form {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: stretch;
     justify-content: flex-end;
-    width: 500px;
+    width: 700px;
 }
 
 .container.add-user-form label {
@@ -275,7 +279,7 @@ table tbody td,table tbody th {
 }
 
 .custom-select-add-user {
-    width: 400px;
+    width: 100%;
 }
 
 .flash {
