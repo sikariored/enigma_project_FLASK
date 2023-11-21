@@ -207,7 +207,7 @@ def get_departments():
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    return redirect(url_for('profile'))
 
 @app.route('/info')
 def info():
