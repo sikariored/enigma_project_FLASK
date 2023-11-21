@@ -1,0 +1,10 @@
+# Игнорировать виртуальное окружение Python
+venv/
+__pycache__/
+
+# Игнорировать все файлы .pyc
+*.pyc
+
+# Игнорировать файлы с настройками IDE (например, для Visual Studio Code)
+.vscode/
+*.Identifier

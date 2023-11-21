@@ -1,0 +1,67 @@
+{% extends 'base.html' %} {% block additional_styles %}
+<link
+  rel="stylesheet"
+  href="{{ url_for('static', filename='css/admin_profile_style.css') }}"
+/>
+{% endblock %} {% block title %}Админ-панель{% endblock %} {% block content %}
+<body>
+  <div class="admin-profile-wrapper">
+    <div class="browser left-wrapper">
+      <div class="browser-title" id="browser-left-title">
+        <h3>Отделы</h3>
+        <input type="text" id="userSearch" placeholder="Поиск пользователей" />
+      </div>
+      <ul id="departments-list">
+        {% for department, users in users_from_departments.items() %}
+        <li>
+          <details>
+            <summary>{{ department }}</summary>
+            <ul>
+              {% for user in users %}
+              <li>{{ user }}</li>
+              {% endfor %}
+            </ul>
+          </details>
+        </li>
+        {% endfor %}
+      </ul>
+    </div>
+    <div class="browser center-wrapper">
+      <div class="browser-title">
+        <h3>Ресурсы</h3>
+      </div>
+      <div id="userResources">
+        <ul id="userResourcesList">
+          <!-- Список ресурсов пользователя -->
+        </ul>
+      </div>
+    </div>
+    <div class="browser right-wrapper">
+      <div class="browser-title">
+        <h3>Данные</h3>
+      </div>
+      <div id="userResourceInfo" style="display: none;">
+        <div class="userLoginAndPasswordField" id="userLoginWrapper">
+          <p id="loginlable">Логин</p>
+          <div id="userLoginFieldWrapper">
+            <button class="btn" id="copyLoginButton">📑</button>
+          </div>
+        </div>
+        <div class="userLoginAndPasswordField" id="userPasswordWrapper">
+          <p id="passwordlabel">Пароль</p>
+          <div id="userPasswordFieldWrapper">
+            <button class="btn custom-button no-active" type="button" id="show-password-button">👁</button>
+            <button class="btn" id="copyPasswordButton">📑</button>
+          </div>
+        </div>
+        <div id="userCreateInfoWrapper">
+          <p id="whocreatelabel">Кем создан : </p>
+        </div>
+        <div id="createdWrapper"></div>
+      </div>
+    </div>
+  </div>
+</body>
+
+<script src="{{ url_for('static', filename='js/admin_profile.js') }}"></script>
+{% endblock %}

@@ -1,0 +1,214 @@
+{% extends 'base.html' %}
+{% block additional_styles %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/admin_profile_style.css') }}">
+{% endblock %}
+{% block title %}Админ-панель{% endblock %}
+
+{% block content %}
+    <div class="profile-wrapper">
+            <p id="welcome">Добро пожаловать, {{ username }}.</p>
+            <hr>
+        <div class="container-wrapper">
+                <div class="container-edit-user-form">
+                    <h2>Редактирование пользователя</h2>
+                    <form method="POST" action="/edit_user/{{ user_data.userid }}" id="edit_user_form">
+                        <div class="form-group">
+                            <label for="username">Имя</label>
+                            <input type="text" class="form-control" id="username" name="username" value="{{ user_data.username }}" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="userlogin">Логин</label>
+                            <input type="text" class="form-control" id="userlogin" name="userlogin" value="{{ user_data.userlogin }}" required>
+                        </div>
+                        <div class="form-group" id="form-group-password">
+                            <label for="password">Пароль</label>
+                            <div class="form-btn-wrapper"><button class="btn btn-warning custom-button no-active" type="button" id="generate-password-button">🎲</button></div>
+                            <div class="form-btn-wrapper"><button class="btn btn-danger custom-button no-active" type="button" id="show-password-button">👁</button></div>
+                            <input type="password" class="form-control" id="password" name="password" value="{{ user_data.userpassword }}" required>
+                            <div id="password-strength"></div>
+                        </div>
+                        <div class="form-group" id="form-group-resource">
+                            <label for="userresource">Ресурс</label>
+                            <div class="form-btn-wrapper"><button type="button" class="btn btn-primary" id="bitrix24-button">Б24</button></div>
+                            <div class="form-btn-wrapper"><button type="button" class="btn btn-primary" id="email-button">📧</button></div>
+                            <div class="form-btn-wrapper"><button type="button" class="btn btn-primary" id="account-button">🔑</button></div>
+                            <input type="text" class="form-control" id="userresource" name="userresource" value="{{ user_data.userresource }}" required>
+                        </div>
+                        <div class="select-form">
+                            <label for="userrole">Роль</label>
+                            <select class="custom-select custom-select-sm custom-select-edit-user" name="userrole" id="userrole">
+                                {% for role in roles %}
+                                    <option value="{{ role }}" {% if role == user_data.userrole %}selected{% endif %}>{{ role }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="select-form">
+                            <label for="userdepart">Отдел</label>
+                            <select class="custom-select custom-select-sm custom-select-edit-user" name="userdepart" id="userdepart">
+                                {% for department in departments %}
+                                    <option value="{{ department }}" {% if department == user_data.userdepart %}selected{% endif %}>{{ department }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="edit-btn-wrapper"><button type="submit" class="btn btn-primary edit-btn">Сохранить изменения</button></div>
+                    </form>
+                    {% with messages = get_flashed_messages() %}
+                        {% if messages %}
+                        <ul class="flash">
+                            {% for message in messages %}
+                            <li>{{ message }}</li>
+                            {% endfor %}
+                        </ul>
+                        {% endif %}
+                    {% endwith %}
+                    
+                </div>
+    
+                <div class="container add-user-form">
+                        <h2>Создание пароля</h2>
+
+                            <form method="POST" action="/add_user_password" id="add_user_password_form">
+                                <div class="form-group">
+                                    <label for="username">Имя</label>
+                                    <select name="username" id="username"></select>
+                                    <input type="text" class="form-control" id="username" name="username" placeholder="Новый сотрудник">
+                                </div>
+                                <div class="form-group">
+                                    <label for="userlogin">Логин</label>
+                                    <input type="text" class="form-control" id="userlogin" name="userlogin" required>
+                                </div>
+                                <div class="form-group" id="form-group-password">
+                                    <label for="password">Пароль</label>
+                                    <div class="form-btn-wrapper"><button class="btn btn-warning custom-button no-active" type="button" id="generate-password-button">🎲</button></div>
+                                    <div class="form-btn-wrapper"><button class="btn btn-danger custom-button no-active" type="button" id="show-password-button">👁</button></div>
+                                    <input type="password" class="form-control" id="password" name="password" required>
+                                    <div id="password-strength"></div>
+                                </div>
+                                <div class="form-group" id="form-group-resource">
+                                    <label for="resource">Ресурс</label>
+                                    <div class="form-btn-wrapper"><button type="button" class="btn btn-primary" id="bitrix24-button">Б24</button></div>
+                                    <div class="form-btn-wrapper"><button type="button" class="btn btn-primary" id="email-button">📧</button></div>
+                                    <div class="form-btn-wrapper"><button type="button" class="btn btn-primary" id="account-button">🔑</button></div>
+                                    <input type="text" class="form-control" id="resource" name="userresource" required>
+                                </div>
+                                
+                                <div class="select-form">
+                                    <label for="userrole">Роль</label>
+                                    <select class="custom-select custom-select-sm custom-select-add-user" name="userrole" id="userrole">
+                                        {% for role in roles %}
+                                            <option value="{{ role }}">{{ role }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                                <div class="select-form">
+                                    <label for="userdepart">Отдел</label>
+                                    <select class="custom-select custom-select-sm custom-select-add-user" name="userdepart" id="userdepart">
+                                        {% for department in departments %}
+                                            <option value="{{ department }}">{{ department }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                                <div class="add-btn-wrapper"><button type="submit" class="btn btn-primary add-btn">Добавить</button></div>
+                            </form>
+                            {% with messages = get_flashed_messages() %}
+                                {% if messages %}
+                                <ul class="flash">
+                                    {% for message in messages %}
+                                    <li>{{ message }}</li>
+                                    {% endfor %}
+                                </ul>
+                                {% endif %}
+                            {% endwith %}
+                        </div>
+                    </div>
+                        <hr>
+                        <h2>Информация о пользователях</h2>
+                    <div class="table-accounts-filter">
+                        <select class="custom-select custom-select-sm" id="filter-username-select">
+                            <option value="">Выберите имя из списка</option>
+                        </select>
+                        <input class="form-control" type="text" id="filter-username-input" placeholder="---Введите имя--- ">
+                        <!-- <select class="custom-select custom-select-sm" id="filter-role">
+                            <option value="">Фильтр по Роли</option>
+                        </select>
+                        <select class="custom-select custom-select-sm" id="filter-depart">
+                            <option value="">Фильтр по Отделу</option>
+                        </select>
+                        <select class="custom-select custom-select-sm" id="filter-resource">
+                            <option value="">Фильтр по Ресурсу</option>
+                        </select> -->
+                    </div>
+                    <div class="table-accounts-container">
+                        <table class="table table-striped" id="table-users-info">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Имя</th>
+                                    <th>Логин</th>
+                                    <th>Ресурс</th>
+                                    <th>Пароль</th>
+                                    <th>Роль</th>
+                                    <th>Отдел</th>
+                                    <th>Время создания</th>
+                                    <th>Кто создал</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for account in accounts %}
+                                    <tr>
+                                        <td id="table-userid">{{ account.userid }}</td>
+                                        <td data-filter="username">{{ account.username }}</td>
+                                        <td>{{ account.userlogin }}</td>
+                                        <td data-filter="userresource">{{ account.userresource }}</td>
+                                        <td class="password-cell">
+                                            <div class="password-info">
+                                                <span class="password-hidden">{{ "*" * account.userpassword|length }}</span>
+                                            </div>
+                                            <div class="password-actions">
+                                                <button class="btn show-password-table-button">👁</button>
+                                                <button class=" btn copy-password-button">📑</button>
+                                            </div>
+                                        </td>
+                                        <td data-filter="userrole">{{ account.userrole }}</td>
+                                        <td data-filter="userdepart">{{ account.userdepart }}</td>
+                                        <td>{{ account.created }}</td>
+                                        <td>{{ account.whocreate }}</td>
+                                    </tr>
+
+                                    
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                </div>
+    </div>
+    <script>
+        var passwords = [];
+        "{% for account in accounts %}"
+            passwords.push("{{ account.userpassword }}")
+        "{% endfor %}"
+        var showPasswordButtons = document.querySelectorAll('.show-password-table-button');
+        
+        console.log(passwords)
+        console.log(showPasswordButtons)
+
+        showPasswordButtons.forEach(function (button, index) {
+            button.addEventListener('click', function () {
+                var index = Array.from(showPasswordButtons).indexOf(button);
+                var passwordCell = button.closest('tr').querySelector('.password-cell');
+                var passwordHidden = passwordCell.querySelector('.password-hidden');
+
+                if (passwordHidden.textContent === '*'.repeat(passwords[index].length)) {
+                    passwordHidden.textContent = passwords[index];
+                    console.log(passwordHidden.textContent)
+                } else {
+                    passwordHidden.innerHTML = '*'.repeat(passwords[index].length);
+                }
+                
+                
+                
+            });
+        });
+    </script>
+
+    <script src="{{ url_for('static', filename='js/admin_profile.js') }}"></script>
+        {% endblock %}

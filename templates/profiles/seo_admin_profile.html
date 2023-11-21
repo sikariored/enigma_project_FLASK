@@ -1,0 +1,112 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="profile-wrapper">
+        <h1>{% block title %}Профиль{% endblock %}</h1>
+            <p>Добро пожаловать в ваш профиль, {{ username }}! ::: Ваша роль {{ userrole }}</p>
+            <hr>
+                <p>Вы админ SEO Отдела "[КОНФИДЕНЦИАЛЬНО]"</p>
+                <hr>
+                    <div class="container">
+                        <h1>Добавление нового пользователя</h1>
+                        <form method="POST" action="/add_user">
+                            <div class="form-group">
+                                <label for="username">Логин:</label>
+                                <input type="text" class="form-control" id="username" name="username" required pattern="[A-Za-z0-9]+">
+                            </div>
+                            <div class="form-group" id="form-group-password">
+                                <label for="password">Пароль:</label>
+                                <button class="btn btn-warning custom-button no-active" type="button" id="generate-password-button">Сгенерировать</button>
+                                <button class="btn btn-danger custom-button no-active" type="button" id="show-password-button">👁</button>
+                                <input type="password" class="form-control" id="password" name="password" pattern="^[A-Za-z0-9!@#$%^&*()_+=-]+$" required>
+                            </div>
+                            <div class="form-group" id="form-group-resource">
+                                <label for="resource">Ресурс:</label>
+                                <button type="button" class="btn btn-primary" id="bitrix24-button">Битрикс24</button>
+                                <button type="button" class="btn btn-primary" id="email-button">Почта</button>
+                                <input type="text" class="form-control" id="resource" name="userresource" required pattern="[A-Za-z0-9]+">
+                            </div>
+                            
+                            <div class="select-form">
+                                <label for="userrole">Роль:</label>
+                                <select class="custom-select custom-select-sm" name="userrole" id="userrole">
+                                    {% for role in roles %}
+                                        <option value="{{ role }}">{{ role }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div class="select-form">
+                                <label for="userdepart">Отдел:</label>
+                                <select class="custom-select custom-select-sm" name="userdepart" id="userdepart">
+                                    {% for department in departments %}
+                                        <option value="{{ department['departname'] }}">{{ department['departname'] }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <hr>
+                            <button type="submit" class="btn btn-primary">Добавить</button>
+                        </form>
+                        {% with messages = get_flashed_messages() %}
+                            {% if messages %}
+                            <ul class="flash">
+                                {% for message in messages %}
+                                <li>{{ message }}</li>
+                                {% endfor %}
+                            </ul>
+                            {% endif %}
+                        {% endwith %}
+                    </div>
+    </div>
+
+    <script>
+        // Находим кнопку "Битрикс24" по ее id
+        var bitrix24Button = document.getElementById('bitrix24-button');
+    
+        // Находим поле ресурса по его id
+        var resourceField = document.getElementById('resource');
+    
+        // Добавляем обработчик события на нажатие кнопки
+        bitrix24Button.addEventListener('click', function() {
+            // Заполняем поле ресурса текстом "Битрикс24"
+            resourceField.value = 'Bitrix24';
+        });
+
+        var bitrix24Button = document.getElementById('email-button');
+        var resourceField = document.getElementById('resource');
+        bitrix24Button.addEventListener('click', function() {
+            resourceField.value = 'Email';
+        });
+
+        // Функция для генерации случайного пароля
+        function generatePassword(length) {
+        const charset = "abcdefghjkmnopqrstuvwxyzABCDEFGHJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+=-]+$";
+        let password = "";
+        for (let i = 0; i < length; i++) {
+            const randomIndex = Math.floor(Math.random() * charset.length);
+            password += charset.charAt(randomIndex);
+        }
+        return password;
+        }
+
+        var passwordField = document.getElementById('password');
+        var generatePasswordButton = document.getElementById('generate-password-button');
+
+        generatePasswordButton.addEventListener('click', function() {
+            var generatedPassword = generatePassword(24); // Измените длину пароля, если нужно
+            passwordField.value = generatedPassword;
+        });
+
+
+        // Видимость пароля
+        var passwordField = document.getElementById('password');
+        var generatePasswordButton = document.getElementById('generate-password-button');
+        var showPasswordButton = document.getElementById('show-password-button');
+        var isPasswordVisible = false;
+
+        showPasswordButton.addEventListener('click', function() {
+            isPasswordVisible = !isPasswordVisible;
+            passwordField.type = isPasswordVisible ? 'text' : 'password';
+            //showPasswordButton.textContent = isPasswordVisible ? 'Скрыть пароль' : 'Показать пароль';
+        });
+    </script>
+        {% endblock %}

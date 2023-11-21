@@ -1,0 +1,354 @@
+body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    background-color: rgb(8, 8, 8);
+} 
+
+.form-group select {
+    width: 350px;
+}
+
+#bitrix24-button {
+    background-color: aliceblue;
+    color: rgb(0, 110, 255);
+}
+
+h1 {
+    text-align: center;
+}
+
+.select-form label {
+    width: 64px;
+}
+
+.profile-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: aliceblue;
+    margin-top: 80px;
+}
+
+#general-info {
+    margin-top: 160px;
+}
+
+.select-form {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 16px;
+}
+
+#userinfo {
+    color: black;
+}
+
+.table-accounts-container {
+    display: flex;
+    overflow-y: scroll;
+    width: 80%;
+    max-height: 800px;
+    position: relative; /* Необходимо для позиционирования заголовков */
+}
+
+/* Скрыть вертикальный скролл-бар в контейнере, чтобы не было двух скролл-баров */
+.table-accounts-container::-webkit-scrollbar {
+    width: 0;
+}
+
+/* Стили для заголовков таблицы */
+#table-users-info thead th {
+    background-color: #111111; /* Фоновый цвет заголовков */
+    position: sticky; /* Закрепить заголовки */
+    top: 0; /* Прикрепить к верхней части контейнера */
+    z-index: 1; /* Разместить над данными */
+}
+
+
+.table-accounts-container table {
+    width: 100%;
+}
+
+.table-striped tbody tr:nth-child(even) {
+    background-color: #313131;
+}
+
+.table-striped tbody tr:nth-child(odd) {
+    background-color: #1f1f1f;
+}
+
+#table-users-info {
+    color: aliceblue;
+}
+
+.password-cell {
+    display: flex;
+    justify-content: space-between;
+}
+
+.password-info {
+    font-family: 'Courier New', Courier, monospace;
+    color: aqua;
+}
+
+.password-actions {
+    display: flex;
+    
+    margin-left: 10px;
+}
+
+table {
+    text-align: center;
+}
+
+table tr {
+    border-bottom: 1px solid #ffffff;
+}
+.table td, .table th{
+    border-top: 0;
+}
+table tbody td,table tbody th {
+    text-align: center;
+    width: 240px;
+}
+
+#table-userid {
+    width: fit-content;
+}
+
+.add-btn-wrapper {
+    text-align: center;
+}
+
+.add-btn-wrapper button {
+    display: inline-block;
+}
+
+.form-btn-wrapper button{
+    display:  flex;
+    align-items: center;
+}
+
+.add-btn {
+    display: inline-block;
+    background-color: #af132d;
+    color: rgb(255, 255, 255);
+    border-color: transparent;
+    font-weight: bold;
+    width: 100%;
+    transition: 0.2s;
+}
+
+.add-btn:hover {
+    background-color: aquamarine;
+    color: #111111;
+}
+
+.btn:focus, .btn:active {
+    outline: none !important;
+    box-shadow: none;
+}
+
+.form-control {
+    background-color: rgb(24, 24, 24);
+    border-radius: 0px;
+    color: aquamarine;
+    font-family: 'Courier New', Courier, monospace;
+    height: 27px;
+    line-height: 27px;
+    transition: 0.2s;
+    width: 250px;
+}
+
+.form-control:focus {
+    background-color: black;
+    color: aquamarine;
+    
+    border-color: rgba(0, 255, 157, 0.8);
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(0, 255, 157, 0.8);
+    outline: 0 none;
+
+}
+
+.container.add-user-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    width: 500px;
+}
+
+.container.add-user-form label {
+    text-align: left;
+    width: 45px;
+    margin-right: 10px;
+}
+
+.container.add-user-form input {
+    width: 100%;
+}
+
+.container.add-user-form .form-group {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    gap: 10px;
+    margin-bottom: 10px !important;
+}
+
+.form-group button {
+    height: 25px;
+    width: 50px;
+}
+
+.container.add-user-form h1 {
+    margin-bottom: 35px;
+    font-size: 30px;
+}
+
+.container.add-user-form select {
+    color: white;
+    background-color: black;
+    transition: 0.2s;
+    border-color: rgb(44, 180, 105);
+    padding: 3px;
+}
+
+.container.add-user-form select:hover {
+    background-color: black;
+    color: aquamarine;
+    
+    border-color: rgba(0, 255, 157, 0.8);
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(0, 255, 157, 0.8);
+    outline: 0 none;
+
+}
+
+.table-accounts-filter {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin-bottom: 25px;
+    margin-top: 25px;
+    gap: 10px;
+}
+
+.table-accounts-filter select {
+    color: white;
+    background-color: black;
+    transition: 0.2s;
+    border-color: rgb(44, 180, 105);
+    padding: 3px;
+}
+
+.table-accounts-filter select:hover {
+    background-color: black;
+    color: aquamarine;
+    
+    border-color: rgba(0, 255, 157, 0.8);
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(0, 255, 157, 0.8);
+    outline: 0 none;
+
+}
+
+.table-accounts-filter input {
+    background-color: rgb(24, 24, 24);
+    border-radius: 0px;
+    color: aquamarine;
+    font-family: 'Courier New', Courier, monospace;
+    height: 27px;
+    line-height: 27px;
+    transition: 0.2s;
+}
+
+#table-users-info th{
+    color: rgb(61, 209, 165);
+    font-family: 'Courier New', Courier, monospace
+}
+
+#welcome {
+    color: aquamarine;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 20px;
+}
+
+.custom-select-add-user {
+    width: 400px;
+}
+
+.flash {
+    color: #ffffff;
+    list-style-type: none;
+    text-align: center;
+    margin-top: 20px;
+    background-color: blue;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.select2-container--default .select2-selection--single {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    color: white;
+    background-color: black;
+    transition: 0.2s;
+    border-color: rgb(44, 180, 105);
+    padding: 3px;
+    width: 167px;
+
+    font-size: 14px;
+}
+
+.select2-container--default .select2-selection--single:hover {
+    background-color: black;
+    color: aquamarine;
+    
+    border-color: rgba(0, 255, 157, 0.8);
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(0, 255, 157, 0.8);
+    outline: 0 none;
+}
+
+.select2-container--default .select2-selection--single .select2-selection__rendered {
+    color: white;
+}
+
+.select2-container--open .select2-dropdown--below {
+    color: aquamarine;
+    background-color: #000000;
+    border-color: aquamarine;
+}
+
+.select2-search--dropdown .select2-search__field {
+    color: aquamarine;
+    background-color: #1f1f1f;
+    border-color: aquamarine;
+}
+
+.select2-container--default .select2-search--dropdown .select2-search__field {
+    border: none;
+}
+
+.select2-container--default .select2-results__option--selected {
+    background-color: #5f5f5f;
+}
+
+.select2-results__option {
+    padding-left: 5px;
+    padding-top: 0;
+    padding-right: 0;
+    padding-bottom: 0;
+    font-size: 14px;
+}
+
+.select2-container--default .select2-selection--single {
+    border-radius: 0px;
+}
+
+.select2-container .select2-selection--single .select2-selection__clear {
+    display: none;
+    color: red;
+    margin: 0 0 0 0;
+    width: 15px;
+}
