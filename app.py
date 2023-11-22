@@ -216,13 +216,13 @@ def info():
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
-        username = request.form['username']
+        userlogin = request.form['userlogin']
         password = request.form['password']
 
         conn = get_db_connection()
         cursor = conn.cursor()
 
-        cursor.execute('SELECT username, userpassword, userrole, userdepart FROM accounts WHERE username=?', (username,))
+        cursor.execute('SELECT userlogin, username, userpassword, userrole, userdepart FROM accounts WHERE userlogin=?', (userlogin,))
         userdata = cursor.fetchone()
         conn.close()
 
