@@ -51,7 +51,7 @@ h2 {
 .table-accounts-container {
     display: flex;
     overflow-y: scroll;
-    width: 80%;
+    width: 95%;
     max-height: 800px;
     position: relative; /* Необходимо для позиционирования заголовков */
 }
