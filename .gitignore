@@ -4,7 +4,8 @@ __pycache__/
 
 # Игнорировать все файлы .pyc
 *.pyc
-
+# Игнорировать все файлы .db
+*.db
 # Игнорировать файлы с настройками IDE (например, для Visual Studio Code)
 .vscode/
 *.Identifier
